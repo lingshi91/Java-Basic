@@ -1,0 +1,52 @@
+*Java集合API*
+
+
+JAVA集合框架API 包括操作集合对象的接口，实现类和算法等
+
+编程更简单，提高编程速度和代码质量！ 更简单，更快，更好！
+提高非关联的API的互操作性
+节省学习新API成本
+节省设计新API
+鼓励和促进 代码重用
+
+包括6个接口：Collection接口，Set、List、SortedSet接口（均集成自Collection接口）、Map、SortedMap接口。这两个接口不集成Collection接口，所以Map不是真正意义上的集合。
+
+2、什么是Iterator
+ 
+一些集合类提供内容遍历的功能，java.util.Iterator接口允许对象集合进行遍历，依次操作每个对象，在使用Iterators时，在获取Iterator时，Iterator中包含一个对象集合的快照，通常遍历对象时，不建议修改对象的值。
+
+3、Iterator和ListIterator的区别
+
+Iterator只能正向遍历集合，且适用于获取移除元素。
+ListIterator 可以双向遍历，支持修改对象。
+
+4、什么是Map和HashMap
+Map是Java集合框架中的接口，用于存储键值对。
+HashMap是Hash算法实现的Map类。
+
+5、HashMap和HashTable区别
+
+HashMap年轻、不同步、允许key为null、快速失败机制、线程安全
+HashTable 老、同步、不允许key为null、非快速失败、线程非安全
+
+相同点：
+都不能实现顺序（插入顺序）遍历（HashMap的子类LinkedHashMap可以）
+都是key-value存储
+
+选择：非线程安全的数据结构在使用HashMap性能更好，LinkedHashMap可以实现顺序遍历，通过Collections.synchronized(HashMap)实现同步,HashMap 更灵活！
+ 
+6、HashTable中上下文同步的含义
+
+同一时间点只有一个线程能够获取锁对HashTable进行操作，其它线程等待获取锁。
+
+7、快速失败
+一个快速失败系统或软件，用于即时报告故障问题情况。
+会停止正常操作而不是继续执行存在缺陷的操作。
+通常和Iterator相关
+
+8、如何同步HashMap？
+
+Map m = Collection.synchronizedMap(HashMap)
+
+
+
