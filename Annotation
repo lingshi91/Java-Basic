@@ -1,0 +1,16 @@
+注解 Annotation
+
+1.JDK提供的常用注解
+ 	  @Override：限定重写父类方法，只能用于方法
+    @Deprecated:用于表示程序某个元素（类、方法）已经过时
+    @SupperessWarnings:抑制编译器警告
+
+2.如何自定义注解
+    以@SupperessWarnings为例创建
+
+3.元注解 ：可以对已有的注解，进行说明
+
+    1.Retention（指明注解的声明周期）
+    2.Target（指明可以修饰的元素：类、方法、局部变量等）
+    3.Documented (是否可被javadoc解析)
+    4。Inherited(是否具有继承性)

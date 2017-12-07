@@ -1,0 +1,112 @@
+1.泛型在集合中的使用（掌握）
+2.如何自定义泛型类、泛型接口、泛型方法（理解-->使用）
+3.继承与泛型的关系
+4.通配符
+
+1.在集合中不使用泛型
+public void test1() {
+  List list = new ArrayList();
+  list.add(12);
+  list.add(22);
+  list.add(32);
+  list.add(42);
+  //**没有使用泛型任何Object及其子类都能添加进来**
+  list.add(new String("AA"));
+
+  for (int i=0; i<list.size();i++){
+    //强制转换为int时，可能会报ClassCastException
+    int c = (Integer)list.get(i);
+    System.out.println(list.get(i));
+  }
+
+}
+
+2.**在集合中使用泛型**
+public void test2(){
+
+  List<Integer> list = new ArrayList<Integer>();
+  list.add(12);
+  list.add(21);
+  list.add(45);
+
+  Iterator<Integer> it=list.iterator();
+  while(it.hasNext()){
+    System.out.println(it.next());
+  }
+}
+
+
+public void test3(){
+  Map<String,Integer> map= new HashMap<String,Integer>();
+
+  //jdk1.7中加入的特性
+  //Map<String,Integer> map= new HashMap<>();
+
+  map.put("AA", 87);
+  map.put("BB", 78);
+  map.put("DD", 68);
+
+  Set<Map.Entry<String,Integer>> set = map.entrySet();
+  for(Map.Entry<String, Integer> o:set ){
+    System.out.println(o.getKey()+"--->"+o.getValue());
+  }
+
+}
+
+
+3.**自定义泛型类** ***应用***
+//DAO : database access object   数据库访问对象
+public class DAO<T> {
+
+	public void add(T t){
+		//...
+	}
+	public T get(int index){
+		//...
+		return null;
+	}
+	public List<T> getForList(int index){
+		//...
+		return null;
+	}
+	public void delete(int index){
+
+	}
+
+}
+
+public class CustomerDAO extends DAO<Customer>{
+
+}
+
+public class TestCustomerDAO {
+
+	public static void main(String[] args) {
+		CustomerDAO cdao= new  CustomerDAO();
+		cdao.add(new Customer());
+		cdao.get(0);
+	}
+}
+
+
+【注意点】
+1.自定义了泛型类，但是在实例化的时候没有使用，默认使用object类
+2.泛型引用不同的不能相互赋值
+3.加入集合的对象类型必须一致
+4.不能在static方法中使用泛型的声明
+5.如果泛型类是一个抽象类，则不能实例化
+6不能在try-catch中使用泛型的说明
+7.从泛型类派生子类，泛型类型需要具体化
+
+
+4.**泛型和继承的关系**
+A类是B类的子类，G是带泛型声明的类或接口，则G<A>不是G<B>的子类
+
+5.**通配符： ?**
+A类是B类的子类，G是带泛型声明的类或接口，则G<?>是G<A>、G<B>的父类
+
+以List<?>为例，能读取其中的数据。因为不论其存储的什么类的数据都是Object的子类
+以List<?>为例，不能向其中写入数据。因为没有指明存放的类型，所以不能存放。唯一例外的是null
+
+6*. List<? extends A> 可以将List<A>或List<B>赋给List<?>,其中B是A的子类
+    List<? super A>  可以将List<A>或List<B>赋给List<?>,其中B是A的父类

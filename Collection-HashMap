@@ -1,0 +1,30 @@
+HashMap特性：
+
+HHashMap可以接受null键值(key)和值(value)，而Hashtable则不能；
+HashMap是非synchronized;Hashtable是synchronized,多个线程可以共享一个Hashtable;
+如果没有正确的同步的话，多个线程是不能共享HashMap的。Java 5提供了ConcurrentHashMap，它是HashTable的替代，比HashTable的扩展性更好。
+HashMap的迭代器(Iterator)是fail-fast迭代器，而Hashtable的enumerator迭代器不是fail-fast的。
+所以当有其它线程改变了HashMap的结构（增加或者移除元素），将会抛出ConcurrentModificationException，
+但迭代器本身的remove()方法移除元素则不会抛出ConcurrentModificationException异常。但这并不是一个一定发生的行为，要看JVM。这条同样也是Enumeration和Iterator的区别。
+
+
+HashMap单线程环境下它比HashTable要快，不需要同步推荐HashMap
+
+HashMap可以通过下面的语句进行同步：
+Map m = Collections.synchronizeMap(hashMap);
+
+HashMap储存的是键值对
+
+
+HashMap的工作原理
+HashMap基于hashing原理，我们通过put()和get()方法储存和获取对象。
+当我们将键值对传递给put()方法时，它调用键对象的hashCode()方法来计算hashcode，让后找到bucket位置来储存值对象。
+当获取对象时，通过键对象的equals()方法找到正确的键值对，然后返回值对象。
+HashMap使用链表来解决碰撞问题，当发生碰撞了，对象将会储存在链表的下一个节点中。
+ HashMap在每个链表节点中储存键值对对象。
+
+当两个不同的键对象的hashcode相同时会发生什么？
+它们会储存在同一个bucket位置的链表中。键对象的equals()方法用来找到键值对。
+
+因为HashMap的好处非常多，我曾经在电子商务的应用中使用HashMap作为缓存。
+因为金融领域非常多的运用Java，也出于性能的考虑，我们会经常用到HashMap和ConcurrentHashMap。

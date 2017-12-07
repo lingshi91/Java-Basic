@@ -1,0 +1,66 @@
+枚举类
+
+1.如何自定义枚举类  枚举类：类的对象是要有限个数的，且确定的
+    1.私有化类的构造器，保证不能在类的外部创建
+    2.在类的内部创建类的实例。声明为 public static final
+    3.若类有属性。声明为 private final 。此属性在构造器中赋值
+2.采用enum关键字，定义枚举类
+    1.常用方法：values() 和 valueOf(String str)
+    2.枚举类如何实现接口：
+          1.让类实现此接口，类的对象共享同一套接口的抽象方法的实现
+          2.让类的每一个对象，都去实现接口的抽象方法，进而通过类的对象，
+            调用被重写的抽象方法时，结果不同
+
+
+
+示例：
+enum Season1  implements Info{
+
+	SPRING("spring","春暖花开"){
+		public void show(){
+			System.out.println("春天在哪里？");
+		}
+	},
+	SUMER("sumer","盛夏的果实"){
+		public void show(){
+			System.out.println("生如夏花");
+		}
+	},
+	AUTUMN("autumn","秋风萧瑟"){
+		public void show(){
+			System.out.println("是个分手的季节！");
+		}
+	},
+	WINTER("winter","冬天还会远吗？"){
+		public void show(){
+			System.out.println("你的热情好像一把火！");
+		}
+	};
+
+	private final String seansonName;
+	private final String seansonDesc;
+
+	private  Season1(String seansonName,String seansonDesc){
+		this.seansonName=seansonName;
+		this.seansonDesc=seansonDesc;
+
+	}
+
+	public String getSeansonName() {
+		return seansonName;
+	}
+
+	public String getSeansonDesc() {
+		return seansonDesc;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Season [seansonName=" + seansonName + ", seansonDesc=" + seansonDesc + "]";
+	}
+
+	public void show (){
+		System.out.println("this is  a  season!");
+	}
+}
