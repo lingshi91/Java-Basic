@@ -1,0 +1,43 @@
+1.java.io包下
+File类：java程序中的此类的一个对象，就对应着硬盘中的一个文件或目录或者网络中的一个资源
+
+File file1=new File("d:\\io\\hello.txt");
+File file2=new File("d:/io/io")
+  1.File可以表示一个文件（.doc、.xls、.mp3），也可以表示一个文件目录
+  2.File类的对象与平台无关
+  3.File类针对于文件或文件目录，只能进行新建、删除、重命名上层目录等操作。
+  如果涉及访问文件内容，File是无能为力的，只能使用IO流下的提供的相应输入和输出流实现。
+  4.**常把File类的对象作为形参，传递给相应的输入输出流的构造器当中！**
+
+2.IO流的结构
+3.IO流的划分
+  1.按照流的流向的不同：输入流 输出流（站位到程序的角度）
+  2.按照流中的数据单位的不同：字节流  字符流（纯文本文件使用字符流，其它均使用字节流）
+  3.按照流的角色的不同： 节点流 处理流 （节点流：直接作用在文件上 4个）
+
+4.重点
+* 抽象基类 				   			节点流（文件流）                  	          缓冲流
+* InputStream 	   FileInputStream（int read(byte[] b)）				BufferedInputStream          (int read(byte[] b))
+* OutputStream		FileOutputStream（void write(b,0,len)）				BufferedOutputStream (flush()) (void write(b,0,len))
+* Reader         	FileReader(int read(char[] c))							  BufferedReader (readLine()) (int read(char[] c,0,len))或者(String readLine())
+* Writer					FileWriter(void writer(c,0,len)) 							BufferedWrite   (flush()) (void write(c,0,len))或者(void write(String str))
+
+注：
+  1.从文件中读取一个文件，此文件必须存在
+  2.从程序中输出一个文件都硬盘，此文件可以不存在，若不存在，则输出并创建。若不存在，则覆盖原文件内容
+  3.真正的开发中，使用缓冲流代替节点流
+  4.最后要关闭相应的流，先关闭输出流，再关闭输入流。将此操作放入finally中
+
+5.其它流
+  1.转换流：实现字节流和字符流之间的转换
+      InputStreamReader：输入时实现字节流到字符流之间的转换，提高操作效率
+        （前提：文件是文本文件）  ==》解码 ：字节流->字符流
+      OutputStreamWriter：输入时实现字节流到字符流之间的转换，提高操作效率
+                                ==》编码 ：字符流->字节流
+  2.标准输入输出流：
+    System.in:    标准输入流  从键盘输入数据
+    System.out：  标准输出流  从显示器输出数据
+  3.打印流
+  4。数据流
+  5.对象流
+  6.随机存储文件流
