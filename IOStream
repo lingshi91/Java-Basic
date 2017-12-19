@@ -37,7 +37,31 @@ File file2=new File("d:/io/io")
   2.标准输入输出流：
     System.in:    标准输入流  从键盘输入数据
     System.out：  标准输出流  从显示器输出数据
-  3.打印流
-  4。数据流
-  5.对象流
-  6.随机存储文件流
+  3.打印流（都是输出流） PrintStream PrintWriter
+          可以使用System.setOut(PrintStream p) 重新设置输出流的位置
+          PrintStream p= new PrintStream(new FileOutputStream(new File("hello.txt")),true)
+  4.数据流(处理基本数据类型、String类、字节数组)
+          DataInputStream DataOutputStream
+  5.对象流(用来处理对象)
+          对象的序列化机制：
+          允许把内存中的java对象转化为平台无关的二进制流，从而把二进制流永久的保存在硬盘上
+          或者通过 网络将这种二进制流传输到网络另一节点，其它程序获取到这种二进制流，将其转化为java对象
+          ObjectInputStream:  Object readObject()
+          ObjectOutputStream: void writeObject(Object obj)
+
+          如何创建流的对象：
+          ```
+          ObjectOutputStream oos= new ObjectOutputStream(new FileOutputStream(new File("hello.txt")))
+          ObjectInputStream ois= new ObjectInputStream(new FileInputStream(new File("read.txt")))
+          ```
+
+
+          实现序列化机制的对象  对应类的要求：
+                  a.要求类本身实现Serialable接口
+                  b.类本身的所有属性，也要实现Serialable接口
+                  c.要求给类一个版本号：private static final long serialableVersionUID；
+                  d.属性声明为static或transient不能被序列化
+  6.随机存储文件流（RandomAccessFile）
+        a.既可以当做输入流、又可以当做输出流：public RandomAccessFile(File file,String mod)
+        b.支持在文件开头末尾进行写入，如果文件不存在，则创建；若文件已经存在，则对原有文件内容进行覆盖
+        c.支持任意位置的文件的插入
