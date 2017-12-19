@@ -1,0 +1,27 @@
+Maven配置文件目录：
+C:\apache-maven-3.5.0\conf/settings
+指定文件编码
+ File encoding has not been set, using platform encoding GBK, i.e. build is platform dependent!
+<properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+</properties>
+
+自定义编译器配置：
+<profile>
+      <id>custom-compiler</id>
+      <properties>
+        <JAVA_HOME>C:\Java\jdk1.8.0_60</JAVA_HOME>
+      </properties>
+</profile>
+
+Pome
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-compiler-plugin</artifactId>
+	<version>3.5</version>
+	<configuration>
+		<verbose>true</verbose>
+		<fork>true</fork>
+		<executable>${JAVA_HOME}/bin/javac</executable>
+	</configuration>
+</plugin>

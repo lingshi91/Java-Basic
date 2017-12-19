@@ -14,6 +14,7 @@
 
 
 示例：
+```
 enum Season1  implements Info{
 
 	SPRING("spring","春暖花开"){
@@ -64,3 +65,4 @@ enum Season1  implements Info{
 		System.out.println("this is  a  season!");
 	}
 }
+```
